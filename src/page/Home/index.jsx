@@ -24,18 +24,6 @@ const fetchSetData = async (data) => {
 const Home = () => {
     const [data, setData] = useState([])
     const submittingStatus = useRef(false)
-    // 監聽 data 如有改變即執行一次 (在第一次渲染會執行一次)
-    useEffect(() => {
-        // 綁定要作的事情
-        return () => {
-            // 取消綁定
-        }
-    }, [data])
-
-    // useEffect(()=> {
-    //     // 如果第二個參數為空陣列，即可獲得一個一開始可以執行一次的 function
-    //     console.log("init useEffect")
-    // }, [])
 
     useEffect(() => {
         if (!submittingStatus.current) {
@@ -49,10 +37,12 @@ const Home = () => {
         fetchData(setData)
     }, [])
 
-    return <div className="app">
-        <Edit add={setData} submittingStatus={submittingStatus}></Edit>
-        <List listData={data} deleteData={setData}></List>
-    </div>
+    return (
+        <div className="app">
+            <Edit add={setData} submittingStatus={submittingStatus}></Edit>
+            <List listData={data} deleteData={setData}></List>
+        </div>
+    )
 }
 
 export default Home
